@@ -19,8 +19,8 @@ namespace zold.TimeBuzzer.Business.Tests
 
             Thread.Sleep(10000);
 
-            testSessionManger.Stop(testSession);
-            testSessionManger.EditDescription(testSession, "done my test");
+            testSessionManger.Stop();
+            testSessionManger.EditDescription("done my test");
 
             Assert.IsNotNull(testSession);
             Assert.AreNotEqual(DateTime.MinValue, testSession.StartTime);

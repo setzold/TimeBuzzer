@@ -8,28 +8,40 @@ namespace zold.TimeBuzzer.Business
 {
     public class SessionManager
     {
+        private bool _sessionRuns;
+        private ISession _currentSession;
+
         public ISession Start()
         {
-            ISession session = new Session();
-            session.StartTime = DateTime.Now;
-            return session;
+            if (_sessionRuns)
+                return _currentSession;
+
+            _sessionRuns = true;
+
+            _currentSession = new Session();
+            _currentSession.StartTime = DateTime.Now;
+
+            return _currentSession;
         }
 
-        public void Stop(ISession session)
+        public void Stop()
         {
-            if (session == null)
-                throw new ArgumentNullException("session");
+            if (_currentSession == null)
+                throw new NullReferenceException("_currentSession");
 
-            session.EndTime = DateTime.Now;
+
+            _currentSession.EndTime = DateTime.Now;
+
+            _sessionRuns = false;
         }
 
-        public void EditDescription(ISession session, string description)
+        public void EditDescription(string description)
         {
-            if (session == null)
-                throw new ArgumentNullException("session");
+            if (_currentSession == null)
+                throw new NullReferenceException("_currentSession");
 
 
-            session.Description = description ?? string.Empty;
+            _currentSession.Description = description ?? string.Empty;
         }
     }
 }
