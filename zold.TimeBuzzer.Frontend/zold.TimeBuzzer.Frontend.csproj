@@ -56,6 +56,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\InvertBooleanToVisibilityConverter.cs" />
+    <Compile Include="Converter\TextboxDoubleInputConverter.cs" />
+    <Compile Include="ViewModel\SessionEntriesViewModel.cs" />
+    <Compile Include="ViewModel\SessionEntryViewModel.cs" />
+    <Compile Include="View\SessionEntriesView.xaml.cs">
+      <DependentUpon>SessionEntriesView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Resource\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\ViewModelDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -69,6 +84,10 @@
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\SessionEntriesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -94,7 +113,22 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\zold.TimeBuzzer.Business\zold.TimeBuzzer.Business.csproj">
+      <Project>{81bc3755-a783-4a15-8d83-bbab6a2171ae}</Project>
+      <Name>zold.TimeBuzzer.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zold.TimeBuzzer.Interface\zold.TimeBuzzer.Interface.csproj">
+      <Project>{15263d0a-abd0-49b4-9946-9f3a6716c1cd}</Project>
+      <Name>zold.TimeBuzzer.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\edit_white.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

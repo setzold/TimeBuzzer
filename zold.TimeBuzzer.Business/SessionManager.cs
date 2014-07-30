@@ -26,21 +26,18 @@ namespace zold.TimeBuzzer.Business
 
         public void Stop()
         {
-            if (_currentSession == null)
-                throw new NullReferenceException("_currentSession");
-
-
             _currentSession.EndTime = DateTime.Now;
 
+            _currentSession.TotalHours = Math.Round((_currentSession.EndTime.Value - _currentSession.StartTime).TotalHours, 2, MidpointRounding.ToEven);
+            
             _sessionRuns = false;
         }
 
         public void EditDescription(string description)
         {
-            if (_currentSession == null)
-                throw new NullReferenceException("_currentSession");
-
-
+            if (string.IsNullOrWhiteSpace(description))
+                throw new ArgumentNullException("description");
+            
             _currentSession.Description = description ?? string.Empty;
         }
     }

@@ -10,13 +10,78 @@
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
+
+    <Window.Resources>
+        <RadialGradientBrush  x:Key="StartButtonBackground"  >
+            <GradientStop Color="black" Offset="6"/>
+            <GradientStop Color="LightGreen" Offset="0"/>
+        </RadialGradientBrush>
+
+        <RadialGradientBrush  x:Key="StartButtonBackgroundHover"  >
+            <GradientStop Color="black" Offset="3"/>
+            <GradientStop Color="LightGreen" Offset="0"/>
+        </RadialGradientBrush>
+
+        <RadialGradientBrush  x:Key="StopButtonBackground"  >
+            <GradientStop Color="black" Offset="6"/>
+            <GradientStop Color="red" Offset="0"/>
+        </RadialGradientBrush>
+
+        <RadialGradientBrush  x:Key="StopButtonBackgroundHover"  >
+            <GradientStop Color="black" Offset="3"/>
+            <GradientStop Color="red" Offset="0"/>
+        </RadialGradientBrush>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="64"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Button HorizontalAlignment="Center" 
-                Command="{Binding BuzzerClickCommand}"
-                VerticalAlignment="Center" Width="64" Height="64" Content="{Binding BuzzerTitle}" />
+        <Button HorizontalAlignment="Center" Name="Buzzer"
+                Command="{Binding BuzzerClickCommand}" 
+                VerticalAlignment="Center" Width="64" Height="64" Margin="4" Content="{Binding BuzzerTitle}">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="OverridesDefaultStyle" Value="True"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Background" Value="{StaticResource StartButtonBackground}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Name="border" 
+                                        CornerRadius="32" 
+                                        BorderThickness="2"
+                                        BorderBrush="DarkGray"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource StartButtonBackgroundHover}" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding TimeIsTracking}" Value="True">
+                            <Setter Property="Background" Value="{StaticResource StopButtonBackground}"/>
+                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition  Binding="{Binding TimeIsTracking}" Value="True"/>
+                                <Condition Binding="{Binding  ElementName=Buzzer, Path=IsMouseOver}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter Property="Border.Background" Value="{StaticResource StopButtonBackgroundHover}"/>
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        
+        <ContentPresenter HorizontalAlignment="Stretch" Grid.Row="1"
+                          Content="{Binding SessionEntriesViewModel}" />
     </Grid>
 </Window>
