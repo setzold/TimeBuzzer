@@ -1,4 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using zold.TimeBuzzer.Business;
 using zold.WPF.Common.Command;
 using zold.WPF.Common.ViewModel;
@@ -16,6 +19,9 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
 
         private ICommand _buzzerClickCommand;
 
+        private ImageSource _greenBuzzerIcon;
+        private ImageSource _redBuzzerIcon;
+
         private bool _isTrackingTime;
 
         public bool TimeIsTracking
@@ -28,11 +34,24 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             _buzzerTitle = BuzzerTitleRun;
             _buzzerClickCommand = new RelayCommand(OnBuzzerClick);
             _sessionEntriesViewModel = new SessionEntriesViewModel();
+            _greenBuzzerIcon = new BitmapImage(new Uri("pack://application:,,,/Resource/Images/BuzzerIcon_green.png"));
+            _redBuzzerIcon = new BitmapImage(new Uri("pack://application:,,,/Resource/Images/BuzzerIcon.png")); 
         }
 
         public string WindowTitle
         {
             get { return "Time Buzzer"; }
+        }
+
+        public ImageSource WindowIcon
+        {
+            get 
+            {
+                if (_isTrackingTime)
+                    return _redBuzzerIcon;
+
+                return _greenBuzzerIcon;
+            } 
         }
 
         public string BuzzerTitle
@@ -67,6 +86,7 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
                 _sessionEntriesViewModel.StopSession();
 
             RaiseOnPropertyChanged(() => TimeIsTracking);
+            RaiseOnPropertyChanged(() => WindowIcon);
         }
     }
 }
