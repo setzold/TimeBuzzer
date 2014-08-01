@@ -40,7 +40,8 @@
         </Grid.RowDefinitions>
         <Button HorizontalAlignment="Center" Name="Buzzer"
                 Command="{Binding BuzzerClickCommand}" 
-                VerticalAlignment="Center" Width="64" Height="64" Margin="4" Content="{Binding BuzzerTitle}">
+                VerticalAlignment="Center" Width="64" Height="64" Margin="4" 
+                ToolTip="{Binding BuzzerTitle}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="OverridesDefaultStyle" Value="True"/>
