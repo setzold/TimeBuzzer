@@ -8,9 +8,11 @@ namespace zold.TimeBuzzer.Business
 {
     public class Session : ISession
     {
-        public DateTime StartTime { get; set; }
+        public DateTime Date { get; set; }
+        
+        public TimeSpan StartTime { get; set; }
 
-        public DateTime? EndTime { get; set; }
+        public TimeSpan? EndTime { get; set; }
 
         public string Description { get; set; }
 

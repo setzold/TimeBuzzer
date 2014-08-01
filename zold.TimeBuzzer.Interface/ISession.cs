@@ -7,9 +7,12 @@ namespace zold.TimeBuzzer.Interface
 {
     public interface ISession
     {
-        DateTime StartTime { get; set; }
-        DateTime? EndTime { get; set; }
+        DateTime Date { get; set; }
 
+        TimeSpan StartTime { get; set; }
+
+        TimeSpan? EndTime { get; set; }
+        
         string Description { get; set; }
 
         double TotalHours { get; set; }

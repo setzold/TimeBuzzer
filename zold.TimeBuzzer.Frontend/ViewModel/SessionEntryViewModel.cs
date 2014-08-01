@@ -24,7 +24,7 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
         {
             _sessionIsRunning = true;
             _session = session;
-            _editStartTime = _session.StartTime.Date.ToString("dd.MM.yyyy");
+            _editStartTime = _session.Date.ToString("dd.MM.yyyy");
             _editCommand = new RelayCommand(OnEditCommand);
         }
 
@@ -34,7 +34,9 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             set
             {
                 _session.TotalHours = value;
-                EndTime = _session.StartTime.AddHours(_session.TotalHours);
+
+                TimeSpan addedTime = TimeSpan.FromHours(_session.TotalHours);
+                EndTime = _session.StartTime.Add(addedTime);
                 RaiseOnPropertyChanged(() => TotalHours);
             }
         }
@@ -49,13 +51,23 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             }
         }
 
-        public DateTime StartTime
+        public TimeSpan StartTime
         {
             get { return _session.StartTime; }
             set
             {
                 _session.StartTime = value;
                 RaiseOnPropertyChanged(() => StartTime);
+            }
+        }
+
+        public DateTime SessionDate
+        {
+            get { return _session.Date; }
+            set
+            {
+                _session.Date = value;
+                RaiseOnPropertyChanged(() => SessionDate);
             }
         }
 
@@ -68,14 +80,14 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
 
                 DateTime result;
                 if (DateTime.TryParse(_editStartTime, out result))
-                    StartTime = result;
+                    SessionDate = result;
 
 
                 RaiseOnPropertyChanged(() => EditStartTime);
             }
         }
 
-        public DateTime? EndTime
+        public TimeSpan? EndTime
         {
             get { return _session.EndTime; }
             set
@@ -98,6 +110,11 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
         public ICommand EditCommand
         {
             get { return _editCommand; }
+        }
+        
+        public string EditButtonToolTip
+        {
+            get { return "Change session date"; }
         }
 
         public void RefreshViewModel()
@@ -146,7 +163,7 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             IsEditMode = !_isEditMode;
 
             if (_isEditMode)
-                EditStartTime = _session.StartTime.Date.ToString("dd.MM.yyyy");
+                EditStartTime = _session.Date.ToString("dd.MM.yyyy");
         }
     }
 }

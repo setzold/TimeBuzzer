@@ -30,6 +30,11 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             _sessionEntriesViewModel = new SessionEntriesViewModel();
         }
 
+        public string WindowTitle
+        {
+            get { return "Time Buzzer"; }
+        }
+
         public string BuzzerTitle
         {
             get { return _buzzerTitle; }

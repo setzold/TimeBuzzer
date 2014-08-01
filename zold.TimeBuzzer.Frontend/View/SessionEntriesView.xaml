@@ -58,7 +58,7 @@
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <Grid>
-                            <TextBlock  VerticalAlignment="Center" Text="{Binding StartTime, StringFormat=dd.MM.yyyy}" Margin="5,0,2,0"
+                            <TextBlock  VerticalAlignment="Center" Text="{Binding SessionDate, StringFormat=dd.MM.yyyy}" Margin="5,0,2,0"
                                Visibility="{Binding IsEditMode, Converter={StaticResource  invertBooleanToVisibilityConverter}}"/>
                             <TextBox   VerticalAlignment="Center" Text="{Binding EditStartTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  
                              Visibility="{Binding IsEditMode, Converter={StaticResource  BoolVisibilityConverter}}" Margin="2,0,2,0" />
@@ -89,7 +89,7 @@
             <DataGridTemplateColumn Width="45" Header="Start"  HeaderStyle="{StaticResource BoldGridViewColumn}">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <TextBlock VerticalAlignment="Center"  Text="{Binding StartTime, StringFormat=HH:mm}"  Margin="2,0,2,0" />
+                        <TextBlock VerticalAlignment="Center"  Text="{Binding StartTime, StringFormat=hh\\:mm}"  Margin="2,0,2,0" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -97,7 +97,7 @@
             <DataGridTemplateColumn Width="45" Header="End"  HeaderStyle="{StaticResource BoldGridViewColumn}">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <TextBlock VerticalAlignment="Center" Text="{Binding EndTime, StringFormat=HH:mm}"  Margin="2,0,2,0" />
+                        <TextBlock VerticalAlignment="Center" Text="{Binding EndTime, StringFormat=hh\\:mm}"  Margin="2,0,2,0" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -110,7 +110,9 @@
                             Foreground="White" 
                             BorderBrush="Transparent"
                             BorderThickness="0"
-                            Command="{Binding EditCommand}">
+                            Command="{Binding EditCommand}"
+                                ToolTip="{Binding EditButtonToolTip}"
+                                ToolTipService.ShowOnDisabled="True" ToolTipService.ShowDuration="3000">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <ContentPresenter Content="{TemplateBinding Content}"/>

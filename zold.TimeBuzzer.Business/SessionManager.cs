@@ -19,16 +19,17 @@ namespace zold.TimeBuzzer.Business
             _sessionRuns = true;
 
             _currentSession = new Session();
-            _currentSession.StartTime = DateTime.Now;
+            _currentSession.Date = DateTime.Now;
+            _currentSession.StartTime = _currentSession.Date.TimeOfDay;
 
             return _currentSession;
         }
 
         public void Stop()
         {
-            _currentSession.EndTime = DateTime.Now;
+            _currentSession.EndTime = DateTime.Now.TimeOfDay;
 
-            _currentSession.TotalHours = Math.Round((_currentSession.EndTime.Value - _currentSession.StartTime).TotalHours, 2, MidpointRounding.ToEven);
+            _currentSession.TotalHours = Math.Round((_currentSession.EndTime.Value.Subtract(_currentSession.StartTime)).TotalHours, 2, MidpointRounding.ToEven);
             
             _sessionRuns = false;
         }

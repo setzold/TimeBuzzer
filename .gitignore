@@ -24,6 +24,9 @@
 
 bin/
 obj/
+
 *.suo
 *.user
 *.DotSettings
+
+/stuff

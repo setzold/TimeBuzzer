@@ -13,14 +13,25 @@ namespace zold.TimeBuzzer.Business.Tests
     public class StuffTests
     {
         [TestMethod]
-        public void Test_Some_Stuff()
+        public void Test_TimeSpan_Stuff()
         {
             //Test TimeSpan
             TimeSpan time = new TimeSpan(12, 18, 02);
 
             DateTime checkedDateTime = new DateTime(2014, 07, 01, 12, 18, 02);
-            Assert.AreEqual(checkedDateTime.TimeOfDay, time);
-            Assert.AreEqual(checkedDateTime.ToString("hh:mm:ss"), time.ToString());
+
+            Assert.AreEqual(checkedDateTime.TimeOfDay, time, "Expected TimeofDay not equal");
+            Assert.AreEqual(checkedDateTime.ToString("hh:mm:ss"), time.ToString(), "Expected datetime string not equal");
+
+
+            TimeSpan startTime = time;
+            double hours = 25.5;
+
+            TimeSpan endTime = startTime.Add(TimeSpan.FromHours(hours));
+
+            Assert.AreEqual(13, endTime.Hours, "Expected added timespan is wrong");
+
+
         }
     }
 }
