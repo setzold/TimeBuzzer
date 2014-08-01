@@ -1,0 +1,152 @@
+﻿<UserControl x:Class="zold.TimeBuzzer.Frontend.View.SessionEntriesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:conv="clr-namespace:zold.TimeBuzzer.Frontend.Converter"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600">
+    <UserControl.Resources>
+        <conv:TextboxDoubleInputConverter x:Key="textboxDoubleInputConverter" />
+        <conv:InvertBooleanToVisibilityConverter x:Key="invertBooleanToVisibilityConverter" />
+        <BooleanToVisibilityConverter x:Key="BoolVisibilityConverter" />
+
+        <Style x:Key="BoldGridViewColumn" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Margin" Value="2,2,2,0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Black" />
+        </Style>
+        <Style x:Key="GridViewColumnCell" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Margin" Value="2,0,2,0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+    </UserControl.Resources>
+    <DataGrid AutoGenerateColumns="False" 
+              CanUserReorderColumns="False" 
+              CanUserSortColumns="False"
+              CanUserResizeColumns="False"
+              ItemsSource="{Binding SessionEntries}"
+              GridLinesVisibility="None" 
+              EnableRowVirtualization="False" EnableColumnVirtualization="False" CanUserResizeRows="False"  HeadersVisibility="Column">
+        <DataGrid.Resources>
+            <Style TargetType="DataGridRow">
+                <Style.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"  Color="Transparent"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"  Color="Black"/>
+                </Style.Resources>
+            </Style>
+            <Style TargetType="DataGridCell">
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+        </DataGrid.Resources>
+        <DataGrid.Columns>
+            <DataGridTemplateColumn  Width="100" Header="Date" HeaderStyle="{StaticResource BoldGridViewColumn}">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock  VerticalAlignment="Center" Text="{Binding StartTime, StringFormat=dd.MM.yyyy}" Margin="5,0,2,0"
+                               Visibility="{Binding IsEditMode, Converter={StaticResource  invertBooleanToVisibilityConverter}}"/>
+                            <TextBox   VerticalAlignment="Center" Text="{Binding EditStartTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  
+                             Visibility="{Binding IsEditMode, Converter={StaticResource  BoolVisibilityConverter}}" Margin="2,0,2,0" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn Width="45" Header="Hours" HeaderStyle="{StaticResource BoldGridViewColumn}">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBox VerticalAlignment="Center" Text="{Binding TotalHours, 
+                        UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource textboxDoubleInputConverter}}" 
+                                  Margin="2,0,2,0" />
+
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn Width="*" Header="Description"  HeaderStyle="{StaticResource BoldGridViewColumn}">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBox VerticalAlignment="Center" Text="{Binding Description}"  Margin="2,0,2,0"  />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn Width="45" Header="Start"  HeaderStyle="{StaticResource BoldGridViewColumn}">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock VerticalAlignment="Center"  Text="{Binding StartTime, StringFormat=HH:mm}"  Margin="2,0,2,0" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn Width="45" Header="End"  HeaderStyle="{StaticResource BoldGridViewColumn}">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock VerticalAlignment="Center" Text="{Binding EndTime, StringFormat=HH:mm}"  Margin="2,0,2,0" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn Width="40" Header=" "  HeaderStyle="{StaticResource BoldGridViewColumn}">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button VerticalAlignment="Center" Height="26"
+                            Background="Transparent" 
+                            Foreground="White" 
+                            BorderBrush="Transparent"
+                            BorderThickness="0"
+                            Command="{Binding EditCommand}">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <ContentPresenter Content="{TemplateBinding Content}"/>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <Border Height="26" Width="26"  CornerRadius="13" BorderThickness="0">
+                                <Border.Style>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="Background" Value="White" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsEditMode}" Value="True">
+                                                <Setter Property="Background"  Value="LightGray" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Image Width="24" Height="24">
+                                    <Image.Style>
+                                        <Style TargetType="{x:Type Image}">
+                                            <Setter Property="Source" Value="/zold.TimeBuzzer.Frontend;component/Resource/Images/edit.png" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsEditMode}" Value="True">
+                                                    <Setter Property="Source"  Value="/zold.TimeBuzzer.Frontend;component/Resource/Images/edit_white.png" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                            </Border>
+
+                        </Button>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+
+    </DataGrid>
+
+</UserControl>
