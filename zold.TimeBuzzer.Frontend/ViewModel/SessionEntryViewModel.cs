@@ -12,7 +12,7 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
         private ISession _session;
 
         private string _error;
-        private string _editStartTime;
+        private string _editSessionDate;
 
         private ICommand _editCommand;
 
@@ -24,7 +24,7 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
         {
             _sessionIsRunning = true;
             _session = session;
-            _editStartTime = _session.Date.ToString("dd.MM.yyyy");
+            _editSessionDate = _session.Date.ToString("dd.MM.yyyy");
             _editCommand = new RelayCommand(OnEditCommand);
         }
 
@@ -71,19 +71,19 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             }
         }
 
-        public string EditStartTime
+        public string EditSessionDate
         {
-            get { return _editStartTime; }
+            get { return _editSessionDate; }
             set
             {
-                _editStartTime = value;
+                _editSessionDate = value;
 
                 DateTime result;
-                if (DateTime.TryParse(_editStartTime, out result))
+                if (DateTime.TryParse(_editSessionDate, out result))
                     SessionDate = result;
 
 
-                RaiseOnPropertyChanged(() => EditStartTime);
+                RaiseOnPropertyChanged(() => EditSessionDate);
             }
         }
 
@@ -145,7 +145,7 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
                         break;
                     case "EditStartTime":
                         DateTime dateResult;
-                        if (!string.IsNullOrWhiteSpace(_editStartTime) && !DateTime.TryParse(_editStartTime, out dateResult))
+                        if (!string.IsNullOrWhiteSpace(_editSessionDate) && !DateTime.TryParse(_editSessionDate, out dateResult))
                             _error = "Kein richtiges Datumsformat.";
                         break;
 
@@ -163,7 +163,7 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             IsEditMode = !_isEditMode;
 
             if (_isEditMode)
-                EditStartTime = _session.Date.ToString("dd.MM.yyyy");
+                EditSessionDate = _session.Date.ToString("dd.MM.yyyy");
         }
     }
 }
