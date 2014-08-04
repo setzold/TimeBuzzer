@@ -7,7 +7,7 @@
         Title="{Binding WindowTitle}" Height="350" Width="525"
         mc:Ignorable="d" 
         d:DesignSource="{d:DesignInstance vm:MainWindowViewModel}"
-        Icon="{Binding WindowIcon}" Loaded="Window_Loaded">
+        Icon="{Binding WindowIcon}" >
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>

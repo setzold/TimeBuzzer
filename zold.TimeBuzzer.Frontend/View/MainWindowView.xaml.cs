@@ -21,13 +21,14 @@ namespace zold.TimeBuzzer.Frontend.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        TrayIcon _tray;
+        //TrayIcon _tray;
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /*
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _tray = new TrayIcon(this, OnTrayMouseDoubleClick, OnTrayMouseClick);
@@ -43,6 +44,6 @@ namespace zold.TimeBuzzer.Frontend.View
         private void OnTrayMouseDoubleClick()
         {
             MessageBox.Show("Tray double clicked");
-        }
+        }*/
     }
 }
