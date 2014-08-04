@@ -36,6 +36,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,6 +60,7 @@
     </ApplicationDefinition>
     <Compile Include="Converter\InvertBooleanToVisibilityConverter.cs" />
     <Compile Include="Converter\TextboxDoubleInputConverter.cs" />
+    <Compile Include="Tray\TrayIcon.cs" />
     <Compile Include="ViewModel\SessionEntriesViewModel.cs" />
     <Compile Include="ViewModel\SessionEntryViewModel.cs" />
     <Compile Include="View\SessionEntriesView.xaml.cs">
@@ -134,6 +137,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Images\BuzzerIcon_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
