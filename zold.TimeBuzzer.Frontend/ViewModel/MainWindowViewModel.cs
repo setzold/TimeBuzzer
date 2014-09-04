@@ -25,7 +25,6 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
 
         private TrayIcon _tray;
 
-
         private bool _isTrackingTime;
 
         public bool TimeIsTracking

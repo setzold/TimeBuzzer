@@ -81,7 +81,7 @@
             <DataGridTemplateColumn Width="*" Header="Description"  HeaderStyle="{StaticResource BoldGridViewColumn}">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <TextBox VerticalAlignment="Center" Text="{Binding Description}"  Margin="2,0,2,0"  />
+                        <TextBox VerticalAlignment="Center" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"  Margin="2,0,2,0"  />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
