@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net.Config;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -12,5 +13,10 @@ namespace zold.TimeBuzzer.Frontend
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            //Initialize config for log4net
+            XmlConfigurator.Configure();
+        }
     }
 }

@@ -9,7 +9,7 @@ using zold.WPF.Common.ViewModel;
 
 namespace zold.TimeBuzzer.Frontend.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : LoggedViewModel
     {
         private const string BuzzerTitleRun ="RUN";
         private const string BuzzerTitleStop ="STOP";
@@ -89,6 +89,8 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
 
         private void OnBuzzerClick(object context)
         {
+            Logger.Debug("OnBuzzerClick - enter");
+
             _isTrackingTime = !_isTrackingTime;
             BuzzerTitle = _isTrackingTime ? BuzzerTitleStop : BuzzerTitleRun;
 
@@ -101,6 +103,8 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             RaiseOnPropertyChanged(() => WindowIcon);
 
             _tray.WindowStateChanged();
+
+            Logger.Debug("OnBuzzerClick - leave");
         }
 
         private void OnTrayMouseClick()
