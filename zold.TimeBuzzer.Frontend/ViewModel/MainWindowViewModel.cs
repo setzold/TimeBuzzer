@@ -116,7 +116,6 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             //MessageBox.Show("Tray double clicked");
         }
 
-
         public void OnMainWindowClosing(object sender, CancelEventArgs e)
         {
             Dispose();

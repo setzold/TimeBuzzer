@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows.Input;
 using zold.TimeBuzzer.Interface;
-using zold.WPF.Common.Command;
 using zold.WPF.Common.ViewModel;
 
 namespace zold.TimeBuzzer.Frontend.ViewModel
