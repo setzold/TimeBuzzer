@@ -8,7 +8,6 @@ namespace zold.TimeBuzzer.Business.Tests
     [TestClass]
     public class SessionManagerTests
     {
-
         [TestMethod]
         public void Test_SessionManagerMethods()
         {

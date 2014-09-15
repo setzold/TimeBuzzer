@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="SessionManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionsFileRepositoryTests.cs" />
     <Compile Include="StuffTests.cs" />
   </ItemGroup>
   <ItemGroup>
