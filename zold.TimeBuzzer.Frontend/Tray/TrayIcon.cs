@@ -133,7 +133,10 @@ namespace zold.TimeBuzzer.Frontend.Tray
                 _stopWatch.Stop();
 
             if (_notifyIcon != null)
+            {
+                _notifyIcon.Icon.Dispose();
                 _notifyIcon.Dispose();
+            }
         }
     }
 }

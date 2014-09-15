@@ -1,15 +1,14 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using zold.TimeBuzzer.Business;
 using zold.TimeBuzzer.Frontend.Tray;
 using zold.WPF.Common.Command;
-using zold.WPF.Common.ViewModel;
 
 namespace zold.TimeBuzzer.Frontend.ViewModel
 {
-    public class MainWindowViewModel : LoggedViewModel
+    public class MainWindowViewModel : LoggedViewModel, IDisposable
     {
         private const string BuzzerTitleRun ="RUN";
         private const string BuzzerTitleStop ="STOP";
@@ -115,6 +114,18 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
         private void OnTrayMouseDoubleClick()
         {
             //MessageBox.Show("Tray double clicked");
+        }
+
+
+        public void OnMainWindowClosing(object sender, CancelEventArgs e)
+        {
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            if (_tray != null)
+                _tray.Dispose();
         }
     }
 }
