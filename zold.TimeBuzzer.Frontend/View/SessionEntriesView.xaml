@@ -57,12 +57,7 @@
             <DataGridTemplateColumn  Width="100" Header="Date" HeaderStyle="{StaticResource BoldGridViewColumn}">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <TextBlock  VerticalAlignment="Center" Text="{Binding SessionDate, StringFormat=dd.MM.yyyy}" Margin="5,0,2,0"
-                               Visibility="{Binding IsEditMode, Converter={StaticResource  invertBooleanToVisibilityConverter}}"/>
-                            <TextBox   VerticalAlignment="Center" Text="{Binding EditSessionDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  
-                             Visibility="{Binding IsEditMode, Converter={StaticResource  BoolVisibilityConverter}}" Margin="2,0,2,0" />
-                        </Grid>
+                        <DatePicker VerticalAlignment="Center" SelectedDate="{Binding SessionDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -98,52 +93,6 @@
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <TextBlock VerticalAlignment="Center" Text="{Binding EndTime, StringFormat=hh\\:mm}"  Margin="2,0,2,0" />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-
-            <DataGridTemplateColumn Width="40" Header=" "  HeaderStyle="{StaticResource BoldGridViewColumn}">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <Button VerticalAlignment="Center" Height="26"
-                            Background="Transparent" 
-                            Foreground="White" 
-                            BorderBrush="Transparent"
-                            BorderThickness="0"
-                            Command="{Binding EditCommand}"
-                                ToolTip="{Binding EditButtonToolTip}"
-                                ToolTipService.ShowOnDisabled="True" ToolTipService.ShowDuration="3000">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <ContentPresenter Content="{TemplateBinding Content}"/>
-                                </ControlTemplate>
-                            </Button.Template>
-                            <Border Height="26" Width="26"  CornerRadius="13" BorderThickness="0">
-                                <Border.Style>
-                                    <Style TargetType="{x:Type Border}">
-                                        <Setter Property="Background" Value="White" />
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsEditMode}" Value="True">
-                                                <Setter Property="Background"  Value="LightGray" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Border.Style>
-                                <Image Width="24" Height="24">
-                                    <Image.Style>
-                                        <Style TargetType="{x:Type Image}">
-                                            <Setter Property="Source" Value="/zold.TimeBuzzer.Frontend;component/Resource/Images/edit.png" />
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsEditMode}" Value="True">
-                                                    <Setter Property="Source"  Value="/zold.TimeBuzzer.Frontend;component/Resource/Images/edit_white.png" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                            </Border>
-
-                        </Button>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
