@@ -10,7 +10,6 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
         private ObservableCollection<SessionEntryViewModel> _sessionEntries;
         private SessionEntryViewModel _selectedSession;
 
-
         private SessionManager _sessionManger;
 
         public SessionEntriesViewModel()

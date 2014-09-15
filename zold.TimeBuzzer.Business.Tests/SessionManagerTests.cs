@@ -25,6 +25,7 @@ namespace zold.TimeBuzzer.Business.Tests
             Assert.IsNotNull(testSession);
             Assert.AreNotEqual(DateTime.MinValue, testSession.StartTime);
             Assert.AreNotEqual(DateTime.MinValue, testSession.EndTime);
+            Assert.AreEqual(DateTime.Today, testSession.Date.Date);
             Assert.AreEqual("done my test", testSession.Description);
         }
     }
