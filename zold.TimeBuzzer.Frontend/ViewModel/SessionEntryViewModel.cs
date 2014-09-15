@@ -100,7 +100,6 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
                         if (TotalHours.ToString().Length > 5)
                             _error = "Die Anzahl der Stunden erlaubt maximal 2 Stellen nach dem Komma.";
                         break;
-
                 }
 
                 return _error;
