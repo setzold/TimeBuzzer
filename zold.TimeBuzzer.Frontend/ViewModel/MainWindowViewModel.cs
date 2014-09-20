@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -54,7 +53,6 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
 
             InitializeSessionsAsync();
         }
-
 
         public string WindowTitle
         {
@@ -128,7 +126,6 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             BuzzerClickCommand.Execute(null);
         }
 
-
         private void OnTrayMouseDoubleClick()
         {
             //MessageBox.Show("Tray double clicked");
@@ -166,13 +163,11 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             if (_sessionEntriesViewModel == null) return;
 
             //Delegate to UI Thread
-
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    _sessionEntriesViewModel.Init(_sessionRepositoryController.Sessions);
-                    _isInitialized = true;
-                }
-            ));
+            {
+                _sessionEntriesViewModel.Init(_sessionRepositoryController.Sessions);
+                _isInitialized = true;
+            }));
         }
 
         public void Dispose()
@@ -189,6 +184,9 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             foreach (var sessionEntry in _sessionEntriesViewModel.SessionEntries)
             {
                 if (sessionEntry.Session == null) continue;
+
+                //ignore "empty" sessions with no description
+                if (string.IsNullOrWhiteSpace(sessionEntry.Session.Description)) continue;
 
                 if (_sessionRepositoryController.Sessions.FirstOrDefault(session => session.Equals(sessionEntry.Session)) != null)
                     continue;
