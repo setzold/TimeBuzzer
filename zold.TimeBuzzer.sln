@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zold.TimeBuzzer.Interface",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zold.TimeBuzzer.Frontend", "zold.TimeBuzzer.Frontend\zold.TimeBuzzer.Frontend.csproj", "{C2E437DA-DB10-4469-8544-CD78BAF9BA9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zold.TimeBuzzer.Frontend.Tests", "zold.TimeBuzzer.Frontend.Tests\zold.TimeBuzzer.Frontend.Tests.csproj", "{55D1ECE7-E9E7-4012-A666-AC2D3F2F778A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{C2E437DA-DB10-4469-8544-CD78BAF9BA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2E437DA-DB10-4469-8544-CD78BAF9BA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2E437DA-DB10-4469-8544-CD78BAF9BA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55D1ECE7-E9E7-4012-A666-AC2D3F2F778A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55D1ECE7-E9E7-4012-A666-AC2D3F2F778A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55D1ECE7-E9E7-4012-A666-AC2D3F2F778A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55D1ECE7-E9E7-4012-A666-AC2D3F2F778A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,5 +48,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B0F2E221-FCFA-4E0E-860D-C0422F855032} = {6685463F-019B-4835-B5A0-8A01D69285DE}
 		{97FEAB62-660B-4A41-89D8-D22F9C9F05B0} = {B0F2E221-FCFA-4E0E-860D-C0422F855032}
+		{55D1ECE7-E9E7-4012-A666-AC2D3F2F778A} = {B0F2E221-FCFA-4E0E-860D-C0422F855032}
 	EndGlobalSection
 EndGlobal

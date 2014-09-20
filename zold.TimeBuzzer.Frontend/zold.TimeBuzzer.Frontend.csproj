@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controller\SessionRepositoryController.cs" />
     <Compile Include="Converter\InvertBooleanToVisibilityConverter.cs" />
     <Compile Include="Converter\TextboxDoubleInputConverter.cs" />
     <Compile Include="Tray\TrayIcon.cs" />
