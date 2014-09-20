@@ -52,8 +52,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="zold.WPF.Common">
-      <HintPath>..\libs\zold.Common\0.0.5\zold.WPF.Common.dll</HintPath>
+    <Reference Include="zold.WPF.Common, Version=0.0.5.41358, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\zold.Common\0.0.6\zold.WPF.Common.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

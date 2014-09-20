@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using zold.TimeBuzzer.Business;
 using zold.TimeBuzzer.Interface;
 using zold.WPF.Common.ViewModel;
@@ -16,6 +17,20 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
         {
             _sessionEntries = new ObservableCollection<SessionEntryViewModel>();
             _sessionManger = new SessionManager();
+        }
+
+        public void Init(IEnumerable<ISession> sessions)
+        {
+            if (sessions == null) return;
+
+            foreach (var session in sessions)
+            {
+                if (session == null) continue;
+
+                _sessionEntries.Add(new SessionEntryViewModel(session));
+            }
+
+            RaiseOnPropertyChanged(() => SessionEntries);
         }
 
         public ObservableCollection<SessionEntryViewModel> SessionEntries

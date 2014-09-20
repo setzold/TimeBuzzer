@@ -18,6 +18,11 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             _sessionIsRunning = true;
             _session = session;
         }
+        
+        public ISession Session
+        {
+            get { return _session; }
+        }
 
         public double TotalHours
         {

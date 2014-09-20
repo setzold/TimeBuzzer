@@ -39,7 +39,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Button HorizontalAlignment="Center" Name="Buzzer"
-                Command="{Binding BuzzerClickCommand}" 
+                Command="{Binding BuzzerClickCommand}"
                 VerticalAlignment="Center" Width="64" Height="64" Margin="4" 
                 ToolTip="{Binding BuzzerTitle}">
             <Button.Style>

@@ -25,7 +25,7 @@ namespace zold.TimeBuzzer.Frontend.Controller
             _sessions = new List<ISession>();
         }
 
-        public IEnumerable<ISession> Sessions
+        public IList<ISession> Sessions
         {
             get { return _sessions; }
             private set { _sessions = value.ToList(); }
