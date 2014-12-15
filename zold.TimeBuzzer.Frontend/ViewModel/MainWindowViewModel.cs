@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -33,10 +34,9 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
 
         private bool _isTrackingTime;
 
-        public bool TimeIsTracking
-        {
-            get { return _isTrackingTime; }
-        }
+        private Timer _trackingTimer;
+
+        private TimeSpan _timerTickValue;
 
         public MainWindowViewModel()
         {
@@ -49,6 +49,7 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             _greenBuzzerIcon = new BitmapImage(new Uri("pack://application:,,,/Resource/Images/BuzzerIcon_green.png"));
             _redBuzzerIcon = new BitmapImage(new Uri("pack://application:,,,/Resource/Images/BuzzerIcon.png"));
 
+            _trackingTimer = new Timer(OnTrackingTimerTick);
             _tray = new TrayIcon(GetWindowIcon, OnTrayMouseDoubleClick, OnTrayMouseClick);
 
             InitializeSessionsAsync();
@@ -85,6 +86,21 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             }
         }
 
+        public bool TimeIsTracking
+        {
+            get { return _isTrackingTime; }
+        }
+
+        public TimeSpan TimerTickValue
+        {
+            get { return _timerTickValue; }
+            set
+            {
+                _timerTickValue = value;
+                RaiseOnPropertyChanged(() => TimerTickValue);
+            }
+        }
+
         public SessionEntriesViewModel SessionEntriesViewModel
         {
             get { return _sessionEntriesViewModel; }
@@ -109,9 +125,15 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             BuzzerTitle = _isTrackingTime ? BuzzerTitleStop : BuzzerTitleRun;
 
             if (_isTrackingTime)
+            {
+                StartTracking();
                 _sessionEntriesViewModel.AddSession();
+            }
             else
+            {
+                StopTracking();
                 _sessionEntriesViewModel.StopSession();
+            }
 
             RaiseOnPropertyChanged(() => TimeIsTracking);
             RaiseOnPropertyChanged(() => WindowIcon);
@@ -170,11 +192,40 @@ namespace zold.TimeBuzzer.Frontend.ViewModel
             }));
         }
 
+        private void StartTracking()
+        {
+            _timerTickValue = TimeSpan.FromSeconds(0);
+
+            if (_trackingTimer != null)
+                _trackingTimer.Change(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+        }
+
+        private void StopTracking()
+        {
+            if (_trackingTimer != null)
+                _trackingTimer.Change(Timeout.Infinite, Timeout.Infinite);
+
+            TimerTickValue = TimeSpan.FromSeconds(0);
+        }
+
+        private void OnTrackingTimerTick(object context)
+        {
+            _timerTickValue = _timerTickValue.Add(TimeSpan.FromSeconds(1));
+            
+            Application.Current.Dispatcher.BeginInvoke(new Action(()=>             RaiseOnPropertyChanged(() => TimerTickValue)));
+        }
+
         public void Dispose()
         {
             if (_tray != null)
                 _tray.Dispose();
 
+            if(_trackingTimer!= null)
+            {
+                _trackingTimer.Change(Timeout.Infinite, Timeout.Infinite);
+                _trackingTimer.Dispose();
+
+            }
             if (_sessionRepositoryController == null) return;
             if (_sessionRepositoryController.Sessions == null) return;
 

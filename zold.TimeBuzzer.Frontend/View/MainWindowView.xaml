@@ -81,8 +81,26 @@
                     </Style.Triggers>
                 </Style>
             </Button.Style>
+            <Border CornerRadius="3" Background="White">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Visibility" Value="Hidden" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding TimeIsTracking}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+
+                <TextBlock 
+                       VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Justify" Padding="2" Height="19" Text="{Binding TimerTickValue, StringFormat=T}">
+                    
+                </TextBlock>
+            </Border>
         </Button>
-        
+
+
         <ContentPresenter HorizontalAlignment="Stretch" Grid.Row="1"
                           Content="{Binding SessionEntriesViewModel}" />
     </Grid>
